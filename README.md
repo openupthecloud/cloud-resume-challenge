@@ -1,2 +1,3 @@
 # cloud-resume-challenge
-Cloud Resume Challenge
+
+To use this repo, check out the branches for each section.
