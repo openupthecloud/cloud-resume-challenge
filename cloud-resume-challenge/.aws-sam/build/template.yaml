@@ -16,6 +16,19 @@ Resources:
       WebsiteConfiguration:
         IndexDocument: index.html
       BucketName: my-fantastic-website
+  MyRoute53Record:
+    Type: AWS::Route53::RecordSetGroup
+    Properties:
+      HostedZoneId: Z06245993R6DDL18APSF6
+      RecordSets:
+      - Name: website.cmcloudlab515.info
+        Type: A
+        AliasTarget:
+          HostedZoneId: Z2FDTNDATAQYW2
+          DNSName:
+            Fn::GetAtt:
+            - MyDistribution
+            - DomainName
   MyDistribution:
     Type: AWS::CloudFront::Distribution
     Properties:
