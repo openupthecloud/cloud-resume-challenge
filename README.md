@@ -5,3 +5,10 @@ The [cloud resume challenge](https://cloudresumechallenge.dev/) is a challenge t
 To use this repo, check out the branches for each section.
 
 You can watch the accompanying [video series on YouTube](https://www.youtube.com/channel/UCAklaE5D59xWtip-3Jwa7xA)
+
+## Blogs
+
+_A list of completed blog posts, useful for inspiration and ideas_
+
+* https://dev.to/aws-builders/cloud-resume-challenge-my-journey-50db
+* https://blog.heyitschris.com/posts/cloud-resume-challenge/
