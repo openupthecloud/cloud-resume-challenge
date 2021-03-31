@@ -6,7 +6,7 @@ To use this repo, check out the branches for each section.
 
 You can watch the accompanying [video series on YouTube](https://www.youtube.com/channel/UCAklaE5D59xWtip-3Jwa7xA)
 
-## Blogs
+## Blogs
 
 _A list of completed blog posts, useful for inspiration and ideas_
 
