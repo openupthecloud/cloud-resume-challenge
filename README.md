@@ -13,5 +13,9 @@ _A list of completed blog posts, useful for inspiration and ideas_
 * https://dev.to/aws-builders/cloud-resume-challenge-my-journey-50db
 * https://blog.heyitschris.com/posts/cloud-resume-challenge/
 * https://dev.to/thakurrishabh/portfolio-resume-serverless-website-cloud-resume-challenge-18ln
+* https://seanjziegler.com/how-to-build-a-free-static-resume-site-with-aws-s3-cloudfront-and-route-53/
+* https://dev.to/kyronmckenna/the-cloud-resume-challenge-a-great-learning-experience-2lep
+* https://dev.to/donofriov/cloud-resume-challenge-11a2
+* https://dev.to/therealbolaji/cloud-resume-challenge-4kfb
 
 If you want to put your post here, just send over a PR!
