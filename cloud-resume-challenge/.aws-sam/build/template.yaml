@@ -16,11 +16,6 @@ Resources:
       WebsiteConfiguration:
         IndexDocument: index.html
       BucketName: my-fantastic-website
-  MyCertificate:
-    Type: AWS::CertificateManager::Certificate
-    Properties:
-      DomainName: website.cmcloudlab1035.info
-      ValidationMethod: DNS
   MyRoute53Record:
     Type: AWS::Route53::RecordSetGroup
     Properties:
@@ -34,6 +29,11 @@ Resources:
             Fn::GetAtt:
             - MyDistribution
             - DomainName
+  MyCertificate:
+    Type: AWS::CertificateManager::Certificate
+    Properties:
+      DomainName: website.cmcloudlab1035.info
+      ValidationMethod: DNS
   MyDistribution:
     Type: AWS::CloudFront::Distribution
     Properties:

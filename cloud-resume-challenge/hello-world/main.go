@@ -3,7 +3,6 @@ package main
 import (
 	"errors"
 	"fmt"
-	"io/ioutil"
 	"net/http"
 
 	"github.com/aws/aws-lambda-go/events"
@@ -13,9 +12,6 @@ import (
 var (
 	// DefaultHTTPGetAddress Default Address
 	DefaultHTTPGetAddress = "https://checkip.amazonaws.com"
-
-	// ErrNoIP No IP found in response
-	ErrNoIP = errors.New("No IP in HTTP response")
 
 	// ErrNon200Response non 200 status code in response
 	ErrNon200Response = errors.New("Non 200 Response found")
@@ -31,17 +27,14 @@ func handler(request events.APIGatewayProxyRequest) (events.APIGatewayProxyRespo
 		return events.APIGatewayProxyResponse{}, ErrNon200Response
 	}
 
-	ip, err := ioutil.ReadAll(resp.Body)
-	if err != nil {
-		return events.APIGatewayProxyResponse{}, err
-	}
-
-	if len(ip) == 0 {
-		return events.APIGatewayProxyResponse{}, ErrNoIP
-	}
-
 	return events.APIGatewayProxyResponse{
-		Body:       fmt.Sprintf("Hello, %v", string(ip)),
+		// TODO: This is temporary, come back to fix this later
+		Headers: map[string]string{
+			"Access-Control-Allow-Origin":  "*",
+			"Access-Control-Allow-Methods": "*",
+			"Access-Control-Allow-Headers": "*",
+		},
+		Body:       fmt.Sprintf("{ \"count\": \"2\" }"),
 		StatusCode: 200,
 	}, nil
 }
