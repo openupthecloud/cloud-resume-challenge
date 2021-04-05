@@ -17,5 +17,6 @@ _A list of completed blog posts, useful for inspiration and ideas_
 * https://dev.to/kyronmckenna/the-cloud-resume-challenge-a-great-learning-experience-2lep
 * https://dev.to/donofriov/cloud-resume-challenge-11a2
 * https://dev.to/therealbolaji/cloud-resume-challenge-4kfb
+* https://dev.to/daniels1996/plumber-s-guide-to-cloud-88
 
 If you want to put your post here, just send over a PR!
