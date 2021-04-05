@@ -4,7 +4,7 @@
 2.  ✅ HTML
 3.  ✅ CSS
 4.  ✅ Static S3 Website
-5.  HTTPS
+5.  ✅ HTTPS
 6.  ✅ DNS
 7.  ❌ Javascript
 8.  ❌ Database

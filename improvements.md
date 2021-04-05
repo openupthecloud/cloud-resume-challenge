@@ -4,3 +4,4 @@
 - Don't allow S3 direct access (only through CloudFormation)
 - Swap front-end for something like React
 - Setup proper CORS
+- Throttle API requests (client cache?)
