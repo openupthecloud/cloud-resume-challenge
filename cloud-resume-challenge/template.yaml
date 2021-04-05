@@ -43,6 +43,8 @@ Resources:
         ViewerCertificate:
           AcmCertificateArn: !Ref MyCertificate
           SslSupportMethod: sni-only
+        Aliases:
+          - website.cmcloudlab1035.info # TODO: Don't hardcode me
         DefaultCacheBehavior:
           ViewerProtocolPolicy: redirect-to-https
           TargetOriginId: my-fantastic-website.s3-website-us-east-1.amazonaws.com
