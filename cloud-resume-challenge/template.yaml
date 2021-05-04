@@ -17,14 +17,26 @@ Resources:
       AccessControl: PublicRead
       WebsiteConfiguration:
         IndexDocument: index.html
-      BucketName: my-fantastic-website
+      BucketName: open-up-the-cloud-website
+
+  DynamoDBTable:
+    Type: AWS::DynamoDB::Table
+    Properties:
+      TableName: cloud-resume-challenge
+      BillingMode: PAY_PER_REQUEST
+      AttributeDefinitions:
+        - AttributeName: "ID"
+          AttributeType: "S"
+      KeySchema:
+        - AttributeName: "ID"
+          KeyType: "HASH"
 
   MyRoute53Record:
     Type: "AWS::Route53::RecordSetGroup"
     Properties:
-      HostedZoneId: Z07532492J8E43DHNR72 # TODO: Don't hardcode me
+      HostedZoneId: Z02966111MP0CIAM4G2J # TODO: Don't hardcode me
       RecordSets:
-        - Name: website.cmcloudlab1035.info # TODO: Don't hardcode me
+        - Name: website.cmcloudlab1801.info # TODO: Don't hardcode me
           Type: A
           AliasTarget:
             HostedZoneId: Z2FDTNDATAQYW2
@@ -33,7 +45,7 @@ Resources:
   MyCertificate:
     Type: AWS::CertificateManager::Certificate
     Properties:
-      DomainName: website.cmcloudlab1035.info # TODO: Don't hardcode me
+      DomainName: website.cmcloudlab1801.info # TODO: Don't hardcode me
       ValidationMethod: DNS
 
   MyDistribution:
@@ -44,18 +56,18 @@ Resources:
           AcmCertificateArn: !Ref MyCertificate
           SslSupportMethod: sni-only
         Aliases:
-          - website.cmcloudlab1035.info # TODO: Don't hardcode me
+          - website.cmcloudlab1801.info # TODO: Don't hardcode me
         DefaultCacheBehavior:
           ViewerProtocolPolicy: redirect-to-https
-          TargetOriginId: my-fantastic-website.s3-website-us-east-1.amazonaws.com
+          TargetOriginId: open-up-the-cloud-website.s3-website-us-east-1.amazonaws.com
           DefaultTTL: 0
           MinTTL: 0
           MaxTTL: 0
           ForwardedValues:
             QueryString: false
         Origins:
-          - DomainName: my-fantastic-website.s3-website-us-east-1.amazonaws.com
-            Id: my-fantastic-website.s3-website-us-east-1.amazonaws.com
+          - DomainName: open-up-the-cloud-website.s3-website-us-east-1.amazonaws.com
+            Id: open-up-the-cloud-website.s3-website-us-east-1.amazonaws.com
             CustomOriginConfig:
               OriginProtocolPolicy: match-viewer
         Enabled: "true"
