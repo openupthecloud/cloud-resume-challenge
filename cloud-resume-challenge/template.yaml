@@ -108,6 +108,9 @@ Resources:
   PutFunction:
     Type: AWS::Serverless::Function
     Properties:
+      Policies:
+        - DynamoDBCrudPolicy:
+            TableName: cloud-resume-challenge
       CodeUri: put-function/
       Handler: put-function
       Runtime: go1.x
