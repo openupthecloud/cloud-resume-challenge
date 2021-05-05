@@ -12,6 +12,7 @@ You can watch the accompanying [video series on YouTube](https://www.youtube.com
 
 _A list of completed blog posts, useful for inspiration and ideas_
 
+* https://blog.bryantconti.com/Cloud-Resume-Challenge/
 * https://dev.to/aws-builders/cloud-resume-challenge-my-journey-50db
 * https://blog.heyitschris.com/posts/cloud-resume-challenge/
 * https://dev.to/thakurrishabh/portfolio-resume-serverless-website-cloud-resume-challenge-18ln
