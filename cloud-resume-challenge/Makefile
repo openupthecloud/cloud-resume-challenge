@@ -9,5 +9,8 @@ deploy-infra:
 deploy-site:
 	aws-vault exec acloudguru-sandbox --no-session -- aws s3 sync ./resume-site s3://open-up-the-cloud-website
 
+invoke-get:
+	sam build && aws-vault exec acloudguru-sandbox --no-session -- sam local invoke GetFunction
+
 invoke-put:
 	sam build && aws-vault exec acloudguru-sandbox --no-session -- sam local invoke PutFunction

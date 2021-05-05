@@ -94,6 +94,9 @@ Resources:
   GetFunction:
     Type: AWS::Serverless::Function
     Properties:
+      Policies:
+        - DynamoDBCrudPolicy:
+            TableName: cloud-resume-challenge
       CodeUri: get-function/
       Handler: get-function
       Runtime: go1.x
