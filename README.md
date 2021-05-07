@@ -1,4 +1,4 @@
-The [cloud resume challenge](https://cloudresumechallenge.dev/) is a challenge to help people to prepare for a job in the cloud industry. It's totally free (if you do it "right!"), and it's open to anyone. This repo is for accompanying code for a tutorial series on YouTube. 
+The [cloud resume challenge](https://cloudresumechallenge.dev/) is a challenge by [Forrest Brazeal](https://twitter.com/forrestbrazeal) to help people to prepare for a job in the cloud industry. It's totally free (if you do it "right!"), and it's open to anyone. This repo is for accompanying code for a tutorial series on YouTube. 
 
 ![header](header.png)
 
