@@ -1,24 +1,12 @@
-name: main
-on: push
-env:
-  GO_VERSION: 1.15.x
 
-jobs:
-  test-infra:
-    runs-on: ubuntu-latest
-    timeout-minutes: 2
-    steps:
-      - uses: actions/checkout@v2
-      - uses: actions/setup-go@v2.1.3
-        with:
-          go-version: ${{ env.GO_VERSION }}
-      - name: test get-function
-        run: cd cloud-resume-challenge/get-function && go test -v ./ && cd ../../
-      - name: test put-function
-        run: cd cloud-resume-challenge/put-function && go test -v ./ && cd ../../
+## CI/CD - Tests
 
-  build-and-deploy-infra:
-    needs: test-infra
+1. Add secrets to your pipeline -> https://github.com/openupthecloud/cloud-resume-challenge/settings/secrets/actions
+2. How to do dependent jobs in Github Actions
+
+```yaml
+deploy-infra:
+    needs: build
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
@@ -33,3 +21,4 @@ jobs:
         working-directory: cloud-resume-challenge
       - run: sam deploy --no-confirm-changeset --no-fail-on-empty-changeset
         working-directory: cloud-resume-challenge
+```
