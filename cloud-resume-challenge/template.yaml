@@ -34,9 +34,9 @@ Resources:
   MyRoute53Record:
     Type: "AWS::Route53::RecordSetGroup"
     Properties:
-      HostedZoneId: Z02966111MP0CIAM4G2J # TODO: Don't hardcode me
+      HostedZoneId: Z06589891CJD1C6ZKGGT8 # TODO: Don't hardcode me
       RecordSets:
-        - Name: website.cmcloudlab1801.info # TODO: Don't hardcode me
+        - Name: website.cmcloudlab412.info # TODO: Don't hardcode me
           Type: A
           AliasTarget:
             HostedZoneId: Z2FDTNDATAQYW2
@@ -45,7 +45,7 @@ Resources:
   MyCertificate:
     Type: AWS::CertificateManager::Certificate
     Properties:
-      DomainName: website.cmcloudlab1801.info # TODO: Don't hardcode me
+      DomainName: website.cmcloudlab412.info # TODO: Don't hardcode me
       ValidationMethod: DNS
 
   MyDistribution:
@@ -56,7 +56,7 @@ Resources:
           AcmCertificateArn: !Ref MyCertificate
           SslSupportMethod: sni-only
         Aliases:
-          - website.cmcloudlab1801.info # TODO: Don't hardcode me
+          - website.cmcloudlab412.info # TODO: Don't hardcode me
         DefaultCacheBehavior:
           ViewerProtocolPolicy: redirect-to-https
           TargetOriginId: open-up-the-cloud-website.s3-website-us-east-1.amazonaws.com
