@@ -10,6 +10,14 @@ Globals:
   Function:
     Timeout: 5
 
+Parameters:
+  HostedZoneParameter:
+    Type: String
+    Description: The hosted zone for the Route53 records
+  DomainNameParameter:
+    Type: String
+    Description: The domain name of the site
+
 Resources:
   MyWebsite:
     Type: AWS::S3::Bucket
@@ -34,9 +42,11 @@ Resources:
   MyRoute53Record:
     Type: "AWS::Route53::RecordSetGroup"
     Properties:
-      HostedZoneId: Z06589891CJD1C6ZKGGT8 # TODO: Don't hardcode me
+      HostedZoneId:
+        Ref: HostedZoneParameter
       RecordSets:
-        - Name: website.cmcloudlab412.info # TODO: Don't hardcode me
+        - Name:
+            Ref: DomainNameParameter
           Type: A
           AliasTarget:
             HostedZoneId: Z2FDTNDATAQYW2
@@ -45,7 +55,13 @@ Resources:
   MyCertificate:
     Type: AWS::CertificateManager::Certificate
     Properties:
-      DomainName: website.cmcloudlab412.info # TODO: Don't hardcode me
+      DomainName:
+        Ref: DomainNameParameter
+      DomainValidationOptions:
+        - DomainName:
+            Ref: DomainNameParameter
+          HostedZoneId:
+            Ref: HostedZoneParameter
       ValidationMethod: DNS
 
   MyDistribution:
@@ -55,8 +71,7 @@ Resources:
         ViewerCertificate:
           AcmCertificateArn: !Ref MyCertificate
           SslSupportMethod: sni-only
-        Aliases:
-          - website.cmcloudlab412.info # TODO: Don't hardcode me
+        Aliases: !Split [",", !Ref DomainNameParameter]
         DefaultCacheBehavior:
           ViewerProtocolPolicy: redirect-to-https
           TargetOriginId: open-up-the-cloud-website.s3-website-us-east-1.amazonaws.com

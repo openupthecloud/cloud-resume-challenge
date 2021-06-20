@@ -2,8 +2,8 @@
 
 <head>
     <script>
-        fetch(' https://7t530003nh.execute-api.us-east-1.amazonaws.com/Prod/put')
-            .then(() => fetch(' https://7t530003nh.execute-api.us-east-1.amazonaws.com/Prod/get'))
+        fetch(' https://k6v8p3aoda.execute-api.us-east-1.amazonaws.com/Prod/put')
+            .then(() => fetch(' https://k6v8p3aoda.execute-api.us-east-1.amazonaws.com/Prod/get'))
             .then(response => response.json())
             .then((data) => {
                 document.getElementById('replaceme').innerText = data.count
