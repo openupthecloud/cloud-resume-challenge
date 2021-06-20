@@ -17,6 +17,14 @@ Parameters:
   DomainNameParameter:
     Type: String
     Description: The domain name of the site
+  ApiDomainNameParameter:
+    Type: String
+    Description: The subdomain of the API
+    Default: "api."
+  WebsiteDomainNameParameter:
+    Type: String
+    Description: The subdomain of the API
+    Default: "website."
 
 Resources:
   MyWebsite:
@@ -25,7 +33,7 @@ Resources:
       AccessControl: PublicRead
       WebsiteConfiguration:
         IndexDocument: index.html
-      BucketName: open-up-the-cloud-website
+      BucketName: open-up-the-cloud-resume
 
   DynamoDBTable:
     Type: AWS::DynamoDB::Table
@@ -46,7 +54,10 @@ Resources:
         Ref: HostedZoneParameter
       RecordSets:
         - Name:
-            Ref: DomainNameParameter
+            !Join [
+              "",
+              [!Ref WebsiteDomainNameParameter, !Ref DomainNameParameter],
+            ]
           Type: A
           AliasTarget:
             HostedZoneId: Z2FDTNDATAQYW2
@@ -55,11 +66,12 @@ Resources:
   MyCertificate:
     Type: AWS::CertificateManager::Certificate
     Properties:
-      DomainName:
-        Ref: DomainNameParameter
+      DomainName: !Join ["", ["*.", !Ref DomainNameParameter]]
+      SubjectAlternativeNames:
+        - !Ref DomainNameParameter
+        - !Join ["", ["*.", !Ref DomainNameParameter]]
       DomainValidationOptions:
-        - DomainName:
-            Ref: DomainNameParameter
+        - DomainName: !Ref DomainNameParameter
           HostedZoneId:
             Ref: HostedZoneParameter
       ValidationMethod: DNS
@@ -71,18 +83,25 @@ Resources:
         ViewerCertificate:
           AcmCertificateArn: !Ref MyCertificate
           SslSupportMethod: sni-only
-        Aliases: !Split [",", !Ref DomainNameParameter]
+        Aliases:
+          !Split [
+            ",",
+            !Join [
+              "",
+              [!Ref WebsiteDomainNameParameter, !Ref DomainNameParameter],
+            ],
+          ]
         DefaultCacheBehavior:
           ViewerProtocolPolicy: redirect-to-https
-          TargetOriginId: open-up-the-cloud-website.s3-website-us-east-1.amazonaws.com
+          TargetOriginId: open-up-the-cloud-resume.s3-website-us-east-1.amazonaws.com
           DefaultTTL: 0
           MinTTL: 0
           MaxTTL: 0
           ForwardedValues:
             QueryString: false
         Origins:
-          - DomainName: open-up-the-cloud-website.s3-website-us-east-1.amazonaws.com
-            Id: open-up-the-cloud-website.s3-website-us-east-1.amazonaws.com
+          - DomainName: open-up-the-cloud-resume.s3-website-us-east-1.amazonaws.com
+            Id: open-up-the-cloud-resume.s3-website-us-east-1.amazonaws.com
             CustomOriginConfig:
               OriginProtocolPolicy: match-viewer
         Enabled: "true"
@@ -99,12 +118,20 @@ Resources:
             Effect: Allow
             Principal: "*"
             Action: "s3:GetObject"
-            Resource: !Join
-              - ""
-              - - "arn:aws:s3:::"
-                - !Ref MyWebsite
-                - /*
+            Resource: !Join ["", ["arn:aws:s3:::", !Ref MyWebsite, "/*"]]
       Bucket: !Ref MyWebsite
+
+  ApiGatewayApi:
+    Type: AWS::Serverless::Api
+    Properties:
+      StageName: prod
+      Domain:
+        DomainName:
+          !Join ["", [!Ref ApiDomainNameParameter, !Ref DomainNameParameter]]
+        CertificateArn: !Ref MyCertificate
+        Route53:
+          HostedZoneId:
+            Ref: HostedZoneParameter
 
   GetFunction:
     Type: AWS::Serverless::Function
@@ -122,6 +149,8 @@ Resources:
           Properties:
             Path: /get
             Method: GET
+            RestApiId:
+              Ref: ApiGatewayApi
 
   PutFunction:
     Type: AWS::Serverless::Function
@@ -139,3 +168,5 @@ Resources:
           Properties:
             Path: /put
             Method: GET
+            RestApiId:
+              Ref: ApiGatewayApi
