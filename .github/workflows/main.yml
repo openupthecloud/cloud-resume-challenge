@@ -4,7 +4,7 @@ env:
   GO_VERSION: 1.15.x
 
 jobs:
-  test-infra:
+  unit-test-backend:
     runs-on: ubuntu-latest
     timeout-minutes: 2
     steps:
@@ -17,8 +17,8 @@ jobs:
       - name: test put-function
         run: cd cloud-resume-challenge/put-function && go test -v ./ && cd ../../
 
-  build-and-deploy-infra:
-    needs: test-infra
+  build-and-deploy-backend:
+    needs: unit-test-backend
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
@@ -34,7 +34,24 @@ jobs:
       - run: sam deploy --no-confirm-changeset --no-fail-on-empty-changeset
         working-directory: cloud-resume-challenge
 
-  deploy-site:
+  integration-test-backend:
+    needs: build-and-deploy-backend
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      - run: cd cloud-resume-challenge && make integration-test && cd ../../
+
+  end-to-end-test:
+    needs: integration-test-backend
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      - uses: actions/setup-node@v2
+        with:
+          node-version: 14
+      - run: cd cloud-resume-challenge/end-to-end-test && npm install && node index.js
+
+  deploy-frontend:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
@@ -42,7 +59,7 @@ jobs:
         with:
           args: --delete
         env:
-          AWS_S3_BUCKET: open-up-the-cloud-resume
+          AWS_S3_BUCKET: open-up-the-cloud-site
           AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
           AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
           SOURCE_DIR: cloud-resume-challenge/resume-site

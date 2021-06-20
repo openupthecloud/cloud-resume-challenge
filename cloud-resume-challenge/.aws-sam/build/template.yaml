@@ -30,7 +30,7 @@ Resources:
       AccessControl: PublicRead
       WebsiteConfiguration:
         IndexDocument: index.html
-      BucketName: open-up-the-cloud-resume
+      BucketName: open-up-the-cloud-site
   DynamoDBTable:
     Type: AWS::DynamoDB::Table
     Properties:
@@ -96,16 +96,16 @@ Resources:
             - - Ref: WebsiteDomainNameParameter
               - Ref: DomainNameParameter
         DefaultCacheBehavior:
-          ViewerProtocolPolicy: redirect-to-https
-          TargetOriginId: open-up-the-cloud-resume.s3-website-us-east-1.amazonaws.com
+          ViewerProtocolPolicy: allow-all
+          TargetOriginId: open-up-the-cloud-site.s3-website-us-east-1.amazonaws.com
           DefaultTTL: 0
           MinTTL: 0
           MaxTTL: 0
           ForwardedValues:
             QueryString: false
         Origins:
-        - DomainName: open-up-the-cloud-resume.s3-website-us-east-1.amazonaws.com
-          Id: open-up-the-cloud-resume.s3-website-us-east-1.amazonaws.com
+        - DomainName: open-up-the-cloud-site.s3-website-us-east-1.amazonaws.com
+          Id: open-up-the-cloud-site.s3-website-us-east-1.amazonaws.com
           CustomOriginConfig:
             OriginProtocolPolicy: match-viewer
         Enabled: 'true'

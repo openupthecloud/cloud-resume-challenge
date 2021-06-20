@@ -1,9 +1,10 @@
 <html>
 
 <head>
+    <title>Open Up The Cloud Resume</title>
     <script>
-        fetch(' https://k6v8p3aoda.execute-api.us-east-1.amazonaws.com/Prod/put')
-            .then(() => fetch(' https://k6v8p3aoda.execute-api.us-east-1.amazonaws.com/Prod/get'))
+        fetch('https://api.cmcloudlab966.info/put')
+            .then(() => fetch('https://api.cmcloudlab966.info/get'))
             .then(response => response.json())
             .then((data) => {
                 document.getElementById('replaceme').innerText = data.count
@@ -11,18 +12,70 @@
     </script>
     <link rel="shortcut icon" href="data:image/x-icon;," type="image/x-icon">
     <style>
-        p {
-            color: red;
+        body {
+            max-width: 900px;
+            margin: auto;
         }
+
+        .text-center {
+            text-align: center;
+        }
+
+        .float-right {
+            float: right;
+        }
+
+        .visitorcount {}
     </style>
 </head>
 
 <body>
-    <p> Deployed! </p>
+    <h1 class="text-center"> Lou Bichard </h1>
+    <p class="text-center"><strong>Phone:</strong> 07596 988 999</p>
+    <p class="text-center"><strong>Email:</strong> hello@openupthecloud.com </p>
+
     <p>
+        <i>
+            Sed posuere consectetur est at lobortis. Cras justo odio, dapibus ac facilisis in, egestas eget quam. Lorem
+            ipsum
+            dolor sit amet, consectetur adipiscing elit. Cum sociis natoque penatibus et magnis dis parturient montes,
+            nascetur ridiculus mus. Curabitur blandit tempus porttitor. Cras justo odio, dapibus ac facilisis in,
+            egestas
+            eget quam. Cras mattis consectetur purus sit amet fermentum.
+        </i>
+    </p>
+
+    <h2>Employment History</h2>
+
+    <h3>Company X <span class="float-right"> (Jan 2021 - February 2021)</span></h3>
+    <p>
+        Sed posuere consectetur est at lobortis. Cras justo odio, dapibus ac facilisis in, egestas eget quam. Lorem
+        ipsum dolor sit amet, consectetur adipiscing elit. Cum sociis natoque penatibus et magnis dis parturient montes,
+        nascetur ridiculus mus. Curabitur blandit tempus porttitor. Cras justo odio, dapibus ac facilisis in, egestas
+        eget quam. Cras mattis consectetur purus sit amet fermentum.
+    </p>
+
+    <h3>Company Y <span class="float-right"> (Jan 2021 - February 2021)</span></h3>
+    <p>
+        Sed posuere consectetur est at lobortis. Cras justo odio, dapibus ac facilisis in, egestas eget quam. Lorem
+        ipsum dolor sit amet, consectetur adipiscing elit. Cum sociis natoque penatibus et magnis dis parturient montes,
+        nascetur ridiculus mus. Curabitur blandit tempus porttitor. Cras justo odio, dapibus ac facilisis in, egestas
+        eget quam. Cras mattis consectetur purus sit amet fermentum.
+    </p>
+
+    <h3>Company Z <span class="float-right"> (Jan 2021 - February 2021)</span></h3>
+    <p>
+        Sed posuere consectetur est at lobortis. Cras justo odio, dapibus ac facilisis in, egestas eget quam. Lorem
+        ipsum dolor sit amet, consectetur adipiscing elit. Cum sociis natoque penatibus et magnis dis parturient montes,
+        nascetur ridiculus mus. Curabitur blandit tempus porttitor. Cras justo odio, dapibus ac facilisis in, egestas
+        eget quam. Cras mattis consectetur purus sit amet fermentum.
+    </p>
+
+    <div class="visitorcount text-center">
         Visitors:
         <span id="replaceme" />
-    </p>
+    </div>
+
 </body>
 
 </html>
