@@ -1,3 +1,9 @@
+
+## Deploy Site S3
+
+- Use AWS CLI to upload to S3
+
+```yaml
 deploy-site:
   runs-on: ubuntu-latest
   steps:
@@ -10,3 +16,4 @@ deploy-site:
         AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
         AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
         SOURCE_DIR: cloud-resume-challenge/resume-site
+```
