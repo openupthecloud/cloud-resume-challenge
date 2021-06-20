@@ -42,7 +42,7 @@ jobs:
         with:
           args: --delete
         env:
-          AWS_S3_BUCKET: open-up-the-cloud-website
+          AWS_S3_BUCKET: open-up-the-cloud-resume
           AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
           AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
           SOURCE_DIR: cloud-resume-challenge/resume-site
